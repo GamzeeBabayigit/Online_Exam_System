@@ -1,0 +1,92 @@
+﻿@model OnlineSinav.Models.Soru
+
+@{
+    Layout = "~/Views/Shared/_ogretmenpanel.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Hatalı Soru Bildirimi</title>
+    <link href="~/Content/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-reboot.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   
+    <style>
+        .form-control {
+            height: 80px;
+            margin-bottom: 20px;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div>
+        <form method="post" style="margin: auto;">
+            <div class="row" style="margin-left: 20px; margin-right: 20px;">
+                <div class="col-md-6" style="">
+
+
+                    <div class="form-group">
+
+                        <label for="SoruAdi"><b>Soru  </b></label>
+                        @Html.TextAreaFor(m => m.SoruAdi, new { @class = "form-control" })
+
+                        <label for="DogruCevap"><b>Doğru Cevap  </b></label>
+                        @Html.TextAreaFor(m => m.DogruCevap, new { @class = "form-control" })
+
+                        <label for="YanlışCevap1"><b>1. Yanlış Cevap  </b></label>
+                        @Html.TextAreaFor(m => m.YanlisCevap1, new { @class = "form-control" })
+
+                        <label for="YanlışCevap2"><b>2. Yanlış Cevap  </b></label>
+                        @Html.TextAreaFor(m => m.YanlisCevap2, new { @class = "form-control" })
+
+                        <label for="YanlışCevap3"><b>3. Yanlış Cevap  </b></label>
+                        @Html.TextAreaFor(m => m.YanlisCevap3, new { @class = "form-control" })
+
+                        <label for="YanlışCevap4"><b>4. Yanlış Cevap  </b></label>
+                        @Html.TextAreaFor(m => m.YanlisCevap4, new { @class = "form-control" })
+
+                        <label for="ZorlukDerecesi"><b>Zorluk Derecesi  </b></label>
+                        @Html.TextAreaFor(m => m.ZorlukDerecesi, new { @class = "form-control" })
+
+                        <label for="Puan"><b>Puan  </b></label>
+                        @Html.TextAreaFor(m => m.Puan, new { @class = "form-control" })
+
+
+                        <label for="Alani"><b>Alanı  </b></label>
+                        @Html.TextAreaFor(m => m.Alani, new { @class = "form-control" })
+
+                    </div>
+
+                </div>
+
+                @using (Html.BeginForm("Guncelle", "Home", FormMethod.Post))
+                {
+
+                    <div class="col-md-6" style="font-weight: bold;">
+                        <div class="form-group">
+                            <br />      <p>Soru hatalı mı?</p>
+                            <label class="radio-inline" style="margin-bottom: 20px;"><input type="radio" value="True" name="Hatalimi">Evet</label>
+                            <br />
+
+                            <p>Sorunun hatalı olduğunu neden düşünüyorsunuz?</p>
+                            @Html.TextAreaFor(m => m.HataNedeni, new { @class = "form-control" })
+
+                            @Html.HiddenFor(m => m.Id)
+                            <button type="submit" class="btn btn-info" style="float: right;margin-top: 20px;width: 200px;border-radius: 11px;height: 30px;">Kaydet</button>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </form>
+    </div>
+</body>
+</html>

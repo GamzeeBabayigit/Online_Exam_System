@@ -1,0 +1,70 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Öğrenci Paneli</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
+
+
+    <link href="~/Content/css/adminpanel.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-reboot.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        .navbar{
+            margin-bottom:0px !important;
+
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-inverse" style="background-color: #F7F7F7; border-color: #F7F7F7;">
+        <div class="container-fluid" style="display: initial; font-size: medium;">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#" style="margin-top: 10px;font-size: medium;"><span class="glyphicon glyphicon-education"> </span> Açık Öğretim Fakültesi Online Sınav Sistemi</a>
+            </div>
+            <ul class="nav navbar-nav"></ul>
+            <ul class="nav navbar-nav navbar-right" style="display: block;">
+                <li><a href="/Ogrenci/Index"><span class="glyphicon glyphicon-file"></span>@Session["username"].ToString()</a></li>
+                <li><a href="/Ogrenci/LogOut"><span class="glyphicon glyphicon-remove"></span>Çıkış Yap</a></li>
+
+            </ul>
+        </div>
+    </nav>
+    <div style="    margin-bottom: -20px;">
+        <div class="admin-panel clearfix">
+            <div class="slidebar">
+                <div class="logo">
+                    <a href=""></a>
+                </div>
+                <ul>
+                    <li><a href="/Ogrenci/Index" id="targeted"> <i class="fas fa-door-open"></i>  Hoş Geldiniz</a></li>
+                    <li> <hr /> </li>
+                    <li><a href="/Ogrenci/NewExam"><span class="glyphicon glyphicon-paperclip"></span>    Yaklaşan Sınavlar</a></li>
+                    <li><a href="/Ogrenci/HistoryExam"><i class="fas fa-file"></i>   Sınav Geçmişi</a></li>
+                    <li><a href="/Ogrenci/LogOut"><i class="fas fa-ban"></i>  Güvenli Çıkış Yap</a></li>
+
+
+                </ul>
+            </div>
+            <div class="main">
+                 
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/712e0b150d.js" crossorigin="anonymous"></script>
+    @Html.Partial("_footer")
+
+
+</body>
+
+</html>

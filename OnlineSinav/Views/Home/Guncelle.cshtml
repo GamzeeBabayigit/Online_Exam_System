@@ -1,0 +1,97 @@
+﻿@using OnlineSinav.Controllers
+@using OnlineSinav.Models
+@model OnlineSinav.Models.Soru
+
+@{
+    Layout = "~/Views/Shared/_ogretmenpanel.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Güncelle</title>
+
+    <link href="~/Content/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-reboot.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+                .form-control{
+                height: 80px;
+    margin-bottom: 20px;
+
+        }
+    </style>
+</head>
+<body>
+    
+        <form method="post" style="width: 90%;margin: auto; margin-top:20px; font-size: small;">
+      
+                @using (Html.BeginForm("Guncelle", "Home", FormMethod.Post))
+                {
+                    <div class="form-group">
+
+                        <div class="editor-label">
+                            <label for="Soru"><b><i class="fal fa-acorn"></i>Soru Giriniz </b></label>
+                        </div>
+                        @Html.TextBoxFor(m => m.SoruAdi, new { @class = "form-control" })
+
+                        <div class="editor-label">
+                            <label for="DogruCevap"><b>Doğru Cevap Giriniz </b></label>
+                        </div>
+                        @Html.TextBoxFor(m => m.DogruCevap, new { @class = "form-control" })
+
+                        <div class="editor-label">
+                            <label for="YanlisCevap1"><b>1. Yanlış Cevap </b></label>
+                        </div>
+                        @Html.TextBoxFor(m => m.YanlisCevap1, new { @class = "form-control" })
+
+
+                        <div class="editor-label">
+                            <label for="YanlisCevap2"><b>2. Yanlış Cevap </b></label>
+                        </div>
+                        @Html.TextBoxFor(m => m.YanlisCevap2, new { @class = "form-control" })
+
+
+                        <div class="editor-label">
+                            <label for="YanlisCevap3"><b>3. Yanlış Cevap </b></label>
+                        </div>
+                        @Html.TextBoxFor(m => m.YanlisCevap3, new { @class = "form-control" })
+
+
+                        <div class="editor-label">
+                            <label for="YanlisCevap4"><b>4. Yanlış Cevap </b></label>
+                        </div>
+                        @Html.TextBoxFor(m => m.YanlisCevap4, new { @class = "form-control" })
+
+
+                        <div class="editor-label">
+                            <label for="ZorlukDerecesi"><b>Zorluk Derecesi </b></label>
+                        </div>
+                        @Html.TextBoxFor(m => m.ZorlukDerecesi, new { @class = "form-control" })
+
+                        <div class="editor-label">
+                            <label for="Puan"><b>Puan </b></label>
+                        </div>
+                        @Html.TextBoxFor(m => m.Puan, new { @class = "form-control" })
+
+                        <div class="editor-label">
+                            <label for="Alani"><b>Ders Alanı </b></label>
+                        </div>
+                        @Html.TextBoxFor(m => m.Alani, new { @class = "form-control" })
+
+
+                    </div>
+
+                    @Html.HiddenFor(m => m.Id)
+                    <button type="submit" class="btn btn-info" style=" float: right;width: 190px;border-radius: 11px;height: 30px;">Güncelle</button>
+                }
+        
+        </form>
+ 
+</body>
+</html>

@@ -1,0 +1,59 @@
+﻿@using OnlineSinav.Models
+@model HataliSoruDegerlendirme
+@{
+    Layout = "~/Views/Shared/_ogretmenpanel.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Hatalı Soru Bildirimi</title>
+    <link href="~/Content/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-reboot.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <div style="margin-left:2%;margin-top: 60px;width:99%;">
+
+        @using (Html.BeginForm("HataliSoruDegerlendir", "Home", FormMethod.Post))
+        {
+            <div class="col-md-6" style="font-weight: bold;">
+                <div class="form-group">
+
+                    <div class="form-group">
+                        <label for="SoruId"><b>Soru Id numarası:</b></label>
+                        <input type="text" name="SoruId" class="form-control" readonly value="@ViewBag.soru" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="OgretmenId"><b>Id Numaranız:</b></label>
+                        <input type="text" name="OgretmenId" class="form-control" readonly value="@Session["Id"].ToString()" />
+                    </div>
+
+                    <p>Soru hatalı mı?</p>
+                    <label class="radio-inline"><input type="radio" value="True" name="Cevap">Evet</label>
+                    <label class="radio-inline"><input type="radio" value="False" name="Cevap">Hayır</label>
+                    <br /> <br />
+
+
+                    <p>Cevabınızı bir kaç cümle ile açıklayın</p>
+                    @Html.TextAreaFor(m => m.Nedeni, new { @class = "form-control" })
+
+
+                    @Html.HiddenFor(m => m.Id)
+                </div>
+                <button type="submit" class="btn btn-info" style=" float: right; margin-top:20px; width: 150px; border-radius: 11px;">Kaydet</button>
+            </div>
+
+        }
+
+    </div>
+
+</body>
+</html>

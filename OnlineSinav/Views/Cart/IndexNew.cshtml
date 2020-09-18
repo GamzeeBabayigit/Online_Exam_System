@@ -1,0 +1,113 @@
+﻿@model OnlineSinav.Models.Cart
+
+
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Öğretmen</title>
+
+    <link href="~/Content/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-reboot.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="~/Content/css/tablefor.css" rel="stylesheet" />
+
+    <style>
+        .btn {
+            background-color: steelblue;
+        }
+
+        .fl-table {
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: normal;
+            border: none;
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 100%;
+            white-space: inherit;
+            background-color: white;
+        }
+    </style>
+
+</head>
+
+  
+            <h2>Eklenmiş Sorular</h2>
+            <hr />
+
+            @if (Model.CartLines.Count > 0)
+            {
+
+                <div class="table-wrapper" style="">
+                    <table class="fl-table">
+                        <thead>
+                            <tr style="">
+                                <th>Soru    </th>
+
+                                <th>Zorluk Derecesi      </th>
+                                <th>Alanı      </th>
+
+                                <th>Puanı</th>
+
+                                <th>Puanların Toplamı</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var soru in Model.CartLines)
+                            {
+
+                                <tr>
+                                    <td>@soru.Soru.SoruAdi</td>
+
+                                    <td>@soru.Soru.ZorlukDerecesi</td>
+                                    <td>@soru.Soru.Alani</td>
+                                    <td>@soru.Soru.Puan</td>
+                                    <td>@(soru.Soru.Puan * soru.Quantity)</td>
+
+                                    <td>
+                                        @using (Html.BeginForm("RemoveFromCart","Cart"))
+                                        {
+                                            @Html.Hidden("Id", soru.Soru.Id)
+                                            <button type="submit" class="btn btn-danger">
+                                                <span class="glyphicon glyphicon-trash"></span>
+
+                                            </button>
+
+                                        }
+                                    </td>
+
+                                </tr>
+
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+
+                                <td colspan="4"></td>
+                                @if (@Model.Total() > 100)
+                                {
+                                    <td style="background-color:red;" data-toggle="tooltip" title="100 puanı geçtiniz.. Lütfen birkaç soru çıkarmayı deneyin!">@Model.Total().ToString()</td>
+
+                                }
+                                else
+                                {
+                                    <td>@Model.Total().ToString()</td>
+                                }
+                            </tr>
+                        </tfoot>
+                    </table>
+                     
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info" role="alert" style="height:36%; padding: 18px; font-size: small;">
+                    <i class="fas fa-info-circle"></i>  Sınav için seçili soru bulunmamaktadır.
+
+                </div>
+            }
+             
+   

@@ -1,0 +1,104 @@
+﻿@using OnlineSinav.Models
+@using OnlineSinav.Controllers
+@model List<Soru>
+@{
+    Layout = "~/Views/Shared/_ogretmenpanel.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Öğretmen</title>
+
+    <link href="~/Content/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-reboot.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="~/Content/css/tablefor.css" rel="stylesheet" />
+
+    <style>
+        .btn {
+            background-color: steelblue;
+        }
+
+        .fl-table {
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: normal;
+            border: none;
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 100%;
+            white-space: inherit;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    @if (TempData["UpdateQuestion"] != null)
+    {
+        var guncelsoru = (OnlineSinav.Models.Soru)TempData["UpdateQuestion"];
+        <div class="alert alert-success" role="alert"> <strong> <span class="glyphicon glyphicon-ok"></span> @guncelsoru.SoruAdi</strong> Sorusu Güncellendi... </div>
+    }
+    @if (TempData["CreateQuestion"] != null)
+    {
+        var yenisoru = (OnlineSinav.Models.Soru)TempData["CreateQuestion"];
+        <div class="alert alert-success"> <strong> <span class="glyphicon glyphicon-ok"></span> @yenisoru.SoruAdi</strong> Sorusu Sisteme Eklendi... </div>
+    }
+    @if (TempData["AddExamm"] != null)
+    {
+
+        <div class="alert alert-success" role="alert"> <strong> <span class="glyphicon glyphicon-ok"></span> </strong> Yeni bir sınav tanımladınız.. </div>
+    }
+
+    <div class="table-wrapper" style="">
+        <table class="fl-table">
+            <thead>
+                <tr style="">
+                    <th>Soru    </th>
+                    <th>Doğru Cevap    </th>
+                    <th>1. Yanlış Cevap </th>
+                    <th>2. Yanlış Cevap      </th>
+                    <th>3. Yanlış Cevap      </th>
+                    <th>4. Yanlış Cevap     </th>
+                    <th>Zorluk Derecesi      </th>
+                    <th>Puan     </th>
+                    <th>Alanı      </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var soru in Model)
+                {
+                    if (soru.Alani == Session["Alani"].ToString())
+                    {
+                        <tr>
+                            <td>@soru.SoruAdi</td>
+                            <td><span class="label label-info">@soru.DogruCevap</span></td>
+                            <td><span class="label label-warning">@soru.YanlisCevap1</span></td>
+                            <td><span class="label label-warning">@soru.YanlisCevap2</span></td>
+                            <td><span class="label label-warning">@soru.YanlisCevap3</span></td>
+                            <td><span class="label label-warning">@soru.YanlisCevap4</span></td>
+                            <td>@soru.ZorlukDerecesi</td>
+                            <td>@soru.Puan</td>
+                            <td>@soru.Alani</td>
+
+                            <td><a class="btn btn-info" href="/Home/Guncelle/ @soru.Id">Güncelle</a></td>
+                            <td><a class="btn btn-danger" href="/Home/Sil/ @soru.Id">Sil</a></td>
+                            <td><a class="btn btn-warning" href="/Home/HataliSoru/ @soru.Id">Hatalı Soru</a></td>
+
+                        </tr>
+                    }
+                    
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://kit.fontawesome.com/712e0b150d.js" crossorigin="anonymous"></script>
+</body>
+</html>

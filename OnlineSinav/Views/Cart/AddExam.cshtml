@@ -1,0 +1,146 @@
+﻿@using OnlineSinav.Models
+@model IEnumerable<Soru>
+
+@{
+    Layout = "~/Views/Shared/_ogretmenpanel.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Sınav Ekleme</title>
+
+    <link href="~/Content/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-reboot.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/712e0b150d.js" crossorigin="anonymous"></script>
+    <link href="~/Content/css/tablefor.css" rel="stylesheet" />
+    <style>
+        .btn {
+            font-size: medium !important;
+        }
+
+        .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+            width: 40% !important;
+        }
+
+        .form-control {
+            height: 80px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background-color: steelblue;
+        }
+
+        .fl-table {
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: normal;
+            border: none;
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 100%;
+            white-space: inherit;
+            background-color: white;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
+    
+
+        <br />
+        <script>
+            $(function () {
+                $('select').selectpicker();
+            });
+        </script>
+
+        <div>
+
+            @using (Html.BeginForm("ExamDetails", "Cart", FormMethod.Post))
+            {
+
+                <div class="form-group" style=" border-top: 2px solid darkgoldenrod;">
+
+                    <div class="table-wrapper" style="">
+                        <table class="fl-table">
+                            <thead>
+                                <tr style="">
+                                    <th>Soru    </th>
+                                    <th>Doğru Cevap    </th>
+                                    <th>1. Yanlış Cevap </th>
+                                    <th>2. Yanlış Cevap      </th>
+                                    <th>3. Yanlış Cevap      </th>
+                                    <th>4. Yanlış Cevap     </th>
+                                    <th>Zorluk Derecesi      </th>
+                                    <th>Puan     </th>
+                                    <th>Alanı      </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach(var soru in Model)
+                                {
+                                    if (soru.Alani == Session["Alani"].ToString())
+                                    {
+                                        <tr>
+                                            <td>@soru.SoruAdi</td>
+                                            <td><span class="label label-info">@soru.DogruCevap</span></td>
+                                            <td><span class="label label-warning">@soru.YanlisCevap1</span></td>
+                                            <td><span class="label label-warning">@soru.YanlisCevap2</span></td>
+                                            <td><span class="label label-warning">@soru.YanlisCevap3</span></td>
+                                            <td><span class="label label-warning">@soru.YanlisCevap4</span></td>
+                                            <td>@soru.ZorlukDerecesi</td>
+                                            <td>@soru.Puan</td>
+                                            <td>@soru.Alani</td>
+
+                                            <td>
+
+                                                <a class="btn btn-info" href="/Cart/AddToQuestion/ @soru.Id"><span class="glyphicon glyphicon-plus"></span></a>
+
+                                            </td>
+
+
+                                        </tr>
+                                    }
+                                    else
+                                    {
+                                        <div class="alert alert-info" role="alert" style="height:8%; padding: 18px; font-size: small;">
+                                            <i class="fas fa-info-circle"></i>  Alanınıza ait soru bulunmamaktadır. İlk soruyu siz ekleyin...
+
+                                        </div>
+                                    }
+                                }
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                    @Html.Action("IndexNew", "Cart")    
+
+                </div>
+            }
+
+        </div>
+
+        <div style="float:right;">
+            <a class="btn btn-info" href="/Cart/ExamDetails" style=" width: 228px; border-radius: 11px;"><span class="glyphicon glyphicon-send" aria-hidden="true" style="margin-right:10px;"></span>İlerle</a>
+        </div>
+ 
+    </div>
+</body>
+</html>

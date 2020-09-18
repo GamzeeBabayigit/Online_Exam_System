@@ -1,0 +1,81 @@
+﻿@using OnlineSinav.Models
+@model IEnumerable<Sinav>
+@{
+    ViewBag.Title = "ExamDetails";
+    Layout = "~/Views/Shared/_ogretmenpanel.cshtml";
+}
+
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Sınav Bilgileri</title>
+
+    <link href="~/Content/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-reboot.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/712e0b150d.js" crossorigin="anonymous"></script>
+    <link href="~/Content/css/tablefor.css" rel="stylesheet" />
+    <style>
+        .btn {
+            font-size: medium !important;
+        }
+
+        .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+            width: 40% !important;
+        }
+
+        .form-control {
+            height: 80px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background-color: steelblue;
+        }
+
+        .fl-table {
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: normal;
+            border: none;
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 100%;
+            white-space: inherit;
+            background-color: white;
+        }
+    </style>
+
+</head>
+
+@using (Html.BeginForm("ExamDetails", "Cart", FormMethod.Post))
+            {
+<div class="container" style=" font-size: small; margin-top: 22px; margin-right: 130px; margin-left: 94px; max-width: 1000px;">
+    <label for="BaslangicSaati" style=" margin-top: 15px;"><b>Başlangıç Saati:  </b></label>
+    <input type="datetime-local" name="BaslangicSaati" class="form-control" required />
+
+
+    <label for="BitisSaati"><b>Bitiş Saati:  </b></label>
+    <input type="datetime-local" name="BitisSaati" class="form-control" required />
+
+    <label for="SinavAdi"><b>Sınav Adı: </b></label>
+    <input type="text" name="SinavAdi" class="form-control" required />
+
+    <label for="SinavSuresi"><b>Sınav Süresi: </b></label>
+    <input type="text" name="SinavSuresi" class="form-control" required />
+
+
+    <label for="OgretmenAdi"><b>Öğretmen Adı: </b></label>
+    @*<input type="text" name="OgretmenAdi" class="form-control" required />*@
+    <input type="text" name="OgretmenAdi" class="form-control" readonly value="@Session["username"].ToString()" />
+
+    <label for="KacinciSinif"><b>Sınıf: </b></label>
+    <input type="text" name="KacinciSinif" class="form-control" required />
+
+
+
+    <button type="submit" class="btn btn-info" style=" margin-top: 30px; float: right; width: 140px; border-radius: 11px;margin-bottom: 50px;"><span class="glyphicon glyphicon-check" aria-hidden="true"></span>  Kaydet</button>
+</div>
+
+}

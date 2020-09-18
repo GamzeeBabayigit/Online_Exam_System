@@ -1,0 +1,79 @@
+﻿@using OnlineSinav.Models
+@model IEnumerable<ExamModel>
+
+@{
+    ViewBag.Title = "MyExamList";
+    Layout = "~/Views/Shared/_ogretmenpanel.cshtml";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Sisteme Kayıtlı Sınavlarım</title>
+    <link href="~/Content/css/tablefor.css" rel="stylesheet" />
+
+    <link href="~/Content/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-reboot.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        .btn {
+            background-color: steelblue;
+        }
+
+        .fl-table {
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: normal;
+            border: none;
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 100%;
+            white-space: inherit;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="table-wrapper" style="">
+        <table class="fl-table" style="">
+            <thead>
+                <tr>
+                    <th>Sınav Numarası    </th>
+                    <th>Sınav Adı</th>
+                    <th>Sınav Başlangıcı</th>
+                    <th>Sınav Bitişi </th>
+                    <th>Sınav Süresi</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var quest in Model)
+                {
+
+                    <tr>
+                        <td>@quest.ExamNumber</td>
+                        <td>@quest.SinavAdi</td>
+                        <td>@quest.BaslangicSaati</td>
+                        <td>@quest.BitisSaati</td>
+                        <td>@quest.SinavSuresi</td>
+                        <td></td>
+
+                        <td>
+                            <a class="btn btn-info" href="/Home/DetailsExam/@quest.Id"><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span> Detay</a>
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,209 @@
+﻿@using OnlineSinav.Models
+@model  ExamDetailsModel
+@{
+    Layout = null;
+}
+
+@{
+    
+    int count = 1, countR = 0;
+    int Total = 0;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Sınavda Başarılar..</title>
+    <link href="~/Content/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-reboot.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="jquery.countdown.js" type="text/javascript" charset="utf-8"></script>
+
+    <style type="text/css">
+        div.sayac span {
+            font-weight: bold;
+        }
+
+        .btn {
+            float: right;
+            margin-top: 21px;
+            margin-right: 25px;
+            height: 41px;
+            width: 23%;
+            border-radius: 11px;
+        }
+        body { padding-top: 70px; }
+        body { padding-bottom: 70px; }
+        .navbar .container{
+            justify-content: start;
+        }
+
+        .navbar-default {
+            background-color: #f0ffff;
+            border-color: deepskyblue;
+            box-shadow: 11px -7px 20px -3px rgba(151,164,237,0.73);
+        }
+    </style>
+
+</head>
+
+
+<body style="background-color:white;">
+    @*---start----- for countdown *@
+    <script>
+
+        $(function(){
+            var saat = 0;
+            var dakika = @TempData["StartExam"];
+            var saniye = 0;
+            var sayac = setInterval(function(){
+                if(dakika == 0 && saniye == 0){
+                    saat--;
+                    saniye = 60;
+                    dakika = 60;
+                }
+                if (dakika != 0 && saniye == 0) {
+                    dakika--;
+                    saniye = 60;
+                }
+                if (saniye != 0) {
+                    saniye--;
+                }
+                if(saniye == 0 && dakika == 0 && saat == 0){
+
+                    clearInterval(sayac);
+                    window.location.href="/Ogrenci/EndOfExam";
+                }
+                $("#sayac").html(dakika+":"+saniye)
+            },1000)
+        })
+    </script>
+    @*---end----- for countdown *@
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+    
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+
+        <div class="container">
+         <div style="margin-top: 20px;"> <div style="margin-top: -10px;margin-bottom: 10px; width: 100px;background:red;border-radius: 115px;margin-left: 20px;"><span id="sayac" style="font-size: x-large; margin-left: 20px; color: white;"></span></div></div>
+
+        </div>
+    </nav>
+
+    <div>
+
+        <form action="#" method="post" class="demoForm" id="demoForm">
+
+            <div id="toppings" class="container" style="margin-top:30px;padding: 10px;-webkit-box-shadow: 11px -7px 20px -3px rgba(151,164,237,0.73);-moz-box-shadow: 11px -7px 20px -3px rgba(151,164,237,0.73);box-shadow: 11px -7px 20px -3px rgba(151,164,237,0.73);margin-bottom: 40px; border-radius:5px;">
+
+                @foreach (var item in Model.ExamLines)
+                {
+
+                    <div class="BlockQ" style="border: 1px solid #bdbdbd; width: 75%; border-radius: 4px; margin-top: 40px; background-color: #f0ffff; padding: 8px;">
+
+                        <div class="Question" style="padding: 2%;">
+                            <span class="label label-warning"> @string.Format("{0}{1}.", "Soru", count)</span>
+
+                            <p style="display: inline; padding: 2%;" id="@string.Format("{0}{1}", "Soru", count)">@item.SoruAdi</p>
+                        </div>
+                    </div>
+
+                    <input type="checkbox" id="DogruCevap" value="@item.Puan " /> @(item.DogruCevap)    <br />
+                    <input type="checkbox" id="YanlisCevap1" value="0" /> @(item.YanlisCevap1)  <br />
+                    <input type="checkbox" id="YanlisCevap2" value="0" /> @(item.YanlisCevap2)  <br />
+                    <input type="checkbox" id="YanlisCevap3" value="0" /> @(item.YanlisCevap3)  <br />
+                    <input type="checkbox" id="YanlisCevap4" value="0" /> @(item.YanlisCevap4)  <br />
+
+                    count++;
+
+                }
+            </div>
+            @using (Html.BeginForm("StartExam", "Ogrenci", FormMethod.Post))
+            {
+                <nav class="navbar navbar-default navbar-fixed-bottom">
+                    <div class="container">
+
+
+                        <input type="hidden" value="@Session["Id"]" name="OgrenciId" />
+                        @Html.HiddenFor(m => m.ExamId)
+
+                        <p>
+                            <label><input id="myWork" type="text" name="total" class="num" size="6" value="0" readonly="readonly" /></label>
+
+                        </p>
+                        <button type="submit" class="btn btn-info" style="margin-top: 5px; margin-bottom: 5px;  width: 140px; border-radius: 35px; "><span class="glyphicon glyphicon-check" aria-hidden="true"></span>  Gönder</button>
+
+                    </div>
+                </nav>
+            }
+
+        </form>
+
+    </div>
+
+
+ 
+
+        <script>
+            function attachCheckboxHandlers() {
+                // get reference to element containing toppings checkboxes
+                var el = document.getElementById('toppings');
+
+                // get reference to input elements in toppings container element
+                var tops = el.getElementsByTagName('input');
+
+                // assign updateTotal function to onclick property of each checkbox
+                for (var i=0, len=tops.length; i<len; i++) {
+                    if ( tops[i].type === 'checkbox' ) {
+                        tops[i].onclick = updateTotal;
+                    }
+                }
+            }
+
+            // called onclick of toppings checkboxes
+            function updateTotal(e) {
+                // 'this' is reference to checkbox clicked on
+                var form = this.form;
+
+                // get current value in total text box, using parseFloat since it is a string
+                var val = parseFloat( form.elements['total'].value );
+
+                // if check box is checked, add its value to val, otherwise subtract it
+                if ( this.checked ) {
+                    val += parseFloat(this.value);
+                } else {
+                    val -= parseFloat(this.value);
+                }
+
+                // format val with correct number of decimal places
+                // and use it to update value of total text box
+                form.elements['total'].value = formatDecimal(val);
+            }
+
+            // format val to n number of decimal places
+            // modified version of Danny Goodman's (JS Bible)
+            function formatDecimal(val, n) {
+                n = n || 2;
+                var str = "" + Math.round ( parseFloat(val) * Math.pow(10, n) );
+                while (str.length <= n) {
+                    str =   + str;
+                }
+                var pt = str.length - n;
+                return str.slice(0,pt) ;
+            }
+
+            // in script segment below form
+            attachCheckboxHandlers();
+        </script>
+
+
+
+</body>
+</html>

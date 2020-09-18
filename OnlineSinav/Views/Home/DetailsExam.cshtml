@@ -1,0 +1,78 @@
+﻿@using OnlineSinav.Models
+@model  ExamDetailsModel
+@{
+    ViewBag.Title = "DetailsExam";
+    Layout = "~/Views/Shared/_ogretmenpanel.cshtml";
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Sisteme Kayıtlı Sınavlarım</title>
+    <link href="~/Content/css/tablefor.css" rel="stylesheet" />
+
+    <link href="~/Content/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-reboot.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        .btn {
+            background-color: steelblue;
+        }
+
+        .fl-table {
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: normal;
+            border: none;
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 100%;
+            white-space: inherit;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" style="font-size: small;
+    padding: 10px;">
+        @foreach (var item in Model.ExamLines)
+        {
+
+
+            <div class="panel panel-success">
+                <div class="panel-heading">@item.SoruAdi</div>
+
+                <dl class="row" style="padding: 10px;">
+                    <dt class="col-sm-3"><span class="label label-success">Doğru Cevap :</span></dt>
+                    <dd class="col-sm-9">@item.DogruCevap </dd>
+
+                    <dt class="col-sm-3"><span class="label label-warning">1.Yanlış Cevap: </span> </dt>
+                    <dd class="col-sm-9">@item.YanlisCevap1</dd>
+
+                    <dt class="col-sm-3"><span class="label label-warning">2.Yanlış Cevap: </span>     </dt>
+                    <dd class="col-sm-9">@item.YanlisCevap2</dd>
+
+                    <dt class="col-sm-3"><span class="label label-warning">3.Yanlış Cevap: </span>     </dt>
+                    <dd class="col-sm-9"> @item.YanlisCevap3    </dd>
+
+                    <dt class="col-sm-3"><span class="label label-warning">4.Yanlış Cevap: </span>     </dt>
+                    <dd class="col-sm-9"> @item.YanlisCevap4    </dd>
+
+                    <dt class="col-sm-3"><span class="label label-info">Zorluk Derecesi: </span>     </dt>
+                    <dd class="col-sm-9"> @item.ZorlukDerecesi    </dd>
+
+                    <dt class="col-sm-3"><span class="label label-info"> Puan:</span></dt>
+                    <dd class="col-sm-9"> @item.Puan    </dd>
+
+                </dl>
+            </div>
+
+        }
+
+    </div>
+</body>
+</html>

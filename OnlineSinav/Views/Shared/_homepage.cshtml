@@ -1,0 +1,49 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <meta name="viewport" content="width=device-width" />
+    <title>Online Sınav Sistemi</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
+
+    <link href="~/Content/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-reboot.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid" style="display: initial; font-size: medium;">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#" style="margin-top: 10px;font-size: medium;"><span class="glyphicon glyphicon-education"> </span> Açık Öğretim Fakültesi Online Sınav Sistemi</a>
+            </div>
+            <ul class="nav navbar-nav"></ul>
+            <ul class="nav navbar-nav navbar-right" style="display: block;">
+                <li><a href="/Home/LoginOgr"><span class="glyphicon glyphicon-user"></span> Öğretmen Girişi</a></li>
+                <li><a href="/Home/Login"><span class="glyphicon glyphicon-user"></span> Öğrenci Girişi</a></li>
+
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="container-md">
+        <img src="~/Content/img/video-conference-5352757_1920.png" style="margin: -55px; max-width: inherit;" />
+        @RenderBody()
+
+
+
+    </div>
+    @Html.Partial("_footer")
+
+</body>
+</html>

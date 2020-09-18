@@ -1,0 +1,93 @@
+﻿@using OnlineSinav.Models
+@model List<Soru>
+@{
+    Layout = "~/Views/Shared/_ogretmenpanel.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Hatalı Sorular</title>
+    <link href="~/Content/css/tablefor.css" rel="stylesheet" />
+
+    <link href="~/Content/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-reboot.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        .btn {
+            background-color: steelblue;
+        }
+
+        .fl-table {
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: normal;
+            border: none;
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 100%;
+            white-space: inherit;
+            background-color: white;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="table-wrapper" style="">
+        <table class="fl-table" style="">
+            <thead>
+                <tr>
+                    <th>Soru    </th>
+                    <th>Doğru Cevap    </th>
+                    <th>1. Yanlış Cevap </th>
+                    <th>2. Yanlış Cevap      </th>
+                    <th>3. Yanlış Cevap      </th>
+                    <th>4. Yanlış Cevap     </th>
+                    <th>Zorluk Derecesi      </th>
+                    <th>Puan     </th>
+                    <th>Alanı      </th>
+                    <th>Hata Nedeni</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var soru in Model)
+                {
+                    if (soru.Hatalimi == true)
+                    {
+
+                        <tr>
+                            <td>@soru.SoruAdi</td>
+                            <td>@soru.DogruCevap</td>
+                            <td>@soru.YanlisCevap1</td>
+                            <td>@soru.YanlisCevap2</td>
+                            <td>@soru.YanlisCevap3</td>
+                            <td>@soru.YanlisCevap4</td>
+                            <td>@soru.ZorlukDerecesi</td>
+                            <td>@soru.Puan</td>
+                            <td>@soru.Alani</td>
+                            <th>@soru.HataNedeni</th>
+
+                            <td>
+                                <a class="btn btn-info" href="/Home/HataliSoruDegerlendir/@soru.Id">Değerlendir</a>
+                            </td>
+                            <td><a class="btn btn-success" href="/Home/HataliDegerlendirmeSonuc/@soru.Id">Değerlendirme Sonuçları</a></td>
+
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+   
+    <script src="https://kit.fontawesome.com/712e0b150d.js" crossorigin="anonymous"></script>
+</body>
+</html>

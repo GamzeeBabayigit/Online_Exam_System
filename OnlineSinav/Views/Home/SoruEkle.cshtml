@@ -1,0 +1,101 @@
+﻿@using OnlineSinav.Models
+@model Soru
+
+@{
+    Layout = "~/Views/Shared/_ogretmenpanel.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Soru Ekle</title>
+
+    <link href="~/Content/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-reboot.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/712e0b150d.js" crossorigin="anonymous"></script>
+     
+    <link rel="icon" type="image/png" href="~/favicon.ico" />
+
+    <style>
+        .form-control{
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body  >
+
+  
+
+
+
+    <form method="post" style="width: 100%;font-size:revert; margin: auto; margin-top: -45px;">
+        <div class="w3-container" style="margin:90px;">
+
+
+            @using (Html.BeginForm("SoruEkle", "Home", FormMethod.Post))
+            {
+                <div class="form-group">
+
+                    <div class="editor-label">
+                        <label for="Soru"><b><i class="fal fa-acorn"></i>Soru Giriniz </b></label>
+                    </div>
+                    <input class="form-control" type="text" name="SoruAdi">
+
+                    <div class="editor-label">
+                        <label for="DogruCevap"><b>Doğru Cevap Giriniz </b></label>
+                    </div>
+                    <input class="form-control" type="text" name="DogruCevap">
+
+                    <div class="editor-label">
+                        <label for="YanlisCevap1"><b>1. Yanlış Cevap </b></label>
+                    </div>
+                    <input class="form-control" type="text" name="YanlisCevap1">
+
+                    <div class="editor-label">
+                        <label for="YanlisCevap2"><b>2. Yanlış Cevap </b></label>
+                    </div>
+                    <input class="form-control" type="text" name="YanlisCevap2">
+
+                    <div class="editor-label">
+                        <label for="YanlisCevap3"><b>3. Yanlış Cevap </b></label>
+                    </div>
+                    <input class="form-control" type="text" name="YanlisCevap3">
+
+
+                    <div class="editor-label">
+                        <label for="YanlisCevap4"><b>4. Yanlış Cevap </b></label>
+                    </div>
+                    <input class="form-control" type="text" name="YanlisCevap4">
+
+                    <div class="editor-label">
+                        <label for="ZorlukDerecesi"><b>Zorluk Derecesi </b></label>
+                    </div>
+                    <input class="form-control" type="text" name="ZorlukDerecesi">
+
+                    <div class="editor-label">
+                        <label for="Puan"><b>Puan </b></label>
+                    </div>
+                    <input class="form-control" type="text" name="Puan">
+
+                    <div class="editor-label">
+                        <label for="Alani"><b>Ders Alanı </b></label>
+                    </div>
+                    <input class="form-control" type="text" readonly value="@Session["Alani"]" name="Alani">
+
+
+                </div>
+
+
+                <button type="submit" class="btn btn-info" style="float: right;width: 190px;border-radius: 11px;height: 30px;">Kaydet</button>
+            }
+        </div>
+
+    </form>
+
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+﻿@using OnlineSinav.Models
+@model IEnumerable<GirilenSinavlar>
+@{
+    ViewBag.Title = "historyExam";
+    Layout = "~/Views/Shared/_adminpanel.cshtml";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Öğrenci Paneli</title>
+    <link href="~/Content/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-reboot.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="~/Content/css/tablefor.css" rel="stylesheet" />
+
+</head>
+
+<body style="background-color: #f7f7f7;">
+
+
+    <div class="table-wrapper">
+        <table class="fl-table" style=" ">
+            <thead>
+                <tr>
+                    <th>Sınav Adı    </th>
+                    <th>Öğretmen Adı   </th>
+                    <th>Tarihi</th>
+                    <th>Alınan Puan</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var sinav in Model)
+                {
+                    int sessiOn = int.Parse(Session["Id"].ToString());
+                    if (sinav.OgrenciId == sessiOn)
+                    {
+                        <tr>
+                            <td>@sinav.Exams.SinavAdi</td>
+                            <td>@sinav.Exams.OgretmenAdi</td>
+                            <td>@sinav.Exams.BaslangicSaati</td>
+                            <td>@sinav.total</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://kit.fontawesome.com/712e0b150d.js" crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
